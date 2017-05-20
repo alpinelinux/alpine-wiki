@@ -10,6 +10,7 @@
   <link rel="stylesheet" type="text/css" href="{{base_url}}/css/dialog.css" media="all">
   <link rel="stylesheet" type="text/css" href="{{base_url}}/css/template.css" media="all">
   <link rel="stylesheet" type="text/css" href="{{base_url}}/css/print.css" media="print">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/g/pure@0.6.2(pure-min.css+grids-responsive-min.css)">
   {{#css}}<link rel="stylesheet" type="text/css" href="{{custom_path}}/custom.css" media="all">{{/css}}
   {{#noindex}}<meta name="robots" content="noindex, nofollow" />{{/noindex}}
 
@@ -60,8 +61,29 @@
   <title>{{title}}</title>
 </head>
 <body>
-
+  <div id="wrapper">
+    <header class="pure-g">
+      <div class="pure-u-1 pure-u-lg-4-24">
+        <div class="logo">
+          <a href="/"><img src="//alpinelinux.org/alpinelinux-logo.svg" class="pure-img" alt="" /></a>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-lg-20-24 box-relative menu-wrapper">
+        <nav class="pure-menu pure-menu-horizontal menu-external">
+          <ul class="pure-menu-list">
+            <li class="pure-menu-item"><a href="https://wiki.alpinelinux.org" class="pure-menu-link">wiki</a></li>
+            <li class="pure-menu-item"><a href="http://git.alpinelinux.org" class="pure-menu-link">git</a></li>
+            <li class="pure-menu-item"><a href="https://bugs.alpinelinux.org/projects/alpine/issues" class="pure-menu-link">bugs</a></li>
+            <li class="pure-menu-item"><a href="https://forum.alpinelinux.org/forum" class="pure-menu-link">forums</a></li>
+            <li class="pure-menu-item"><a href="https://pkgs.alpinelinux.org" class="pure-menu-link">packages</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div id="content">
 {{{yield}}}
-
+    </div>
+    <footer>© Copyright 2016 Alpine Linux Development Team all rights reserved | <a href="//alpinelinux.org/privacy-policy.html">Privacy Policy</a></footer>
+  </div>
 </body>
 </html>
