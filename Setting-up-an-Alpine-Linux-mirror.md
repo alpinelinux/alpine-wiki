@@ -130,7 +130,8 @@ Interface "eth0"
 
 ### Generate statistics
 
-copy the following script to /etc/periodic/15min/stats
+Copy the following script to /etc/periodic/15min/stats
+Please not that heredoc should be tab indented or the script will fail. A working copy can be found here: http://tpaste.us/RrMv
 
 ```sh
 #!/bin/sh
@@ -208,14 +209,19 @@ dir="$2"
 
 [ -z "$flock" ] && exec env flock=1 flock $lock $0 "$@"
 
-logger "Syncing directory: $dir"
-
 if [ -n "$dir" ] && [ -d "$dest/${dir%/*}" ]; then
+    logger "Syncing directory: $dir"
     src="${src}${dir%/}/"
     dest="${dest}${dir%/}/"
+else
+    logger "Syncing all directories"
 fi
 
-/usr/bin/rsync -ua \
+/usr/bin/rsync \
+    --archive \
+    --update \
+    --verbose \
+    --progress \
     --timeout=600 \
     --delay-updates \
     --delete-after \
@@ -228,6 +234,10 @@ fi
 `rc-service mqtt-exec start`
 
 `rc-update add mqtt-exec`
+
+To make sure you are not missing any packages (in case something goes wrong with MQTT subscription) you can periodically sync all directories by adding the script to cron.
+
+`ln -s /usr/local/bin/sync-mirror /etc/periodic/hourly/sync-mirror`
 
 Now watch your syslog for sync messages
 
