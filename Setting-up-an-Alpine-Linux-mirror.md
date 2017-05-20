@@ -170,7 +170,7 @@ for type in hours days months top10 summary hsummary vsummary; do
 done
 ```
 
-# Updating via MQTT
+## Updating via MQTT
 
 ### adding mqtt-exec
 
